@@ -1,53 +1,36 @@
-import { createInterface } from 'readline';
 
-import { getCommands } from './commands.js';
+import { State } from "./state.js";
+
 
 export function cleanInput(input: string): string[] {
-    return input.trim().toLowerCase().split(" ").filter(Boolean)
-
+  return input.trim().toLowerCase().split(" ").filter(Boolean);
 }
 
+export async function startREPL(obj: State) {
 
-export function startREPL() {
-    const rl = createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    prompt: "Pokedex > "
-    
-});
+  obj.readline.prompt();
 
-rl.prompt()
-
-function cBack(stering:string) {
-  const cleaned = cleanInput(stering)
-  if (cleaned.length === 0) {
-    rl.prompt()
-  }
-  
-  else {
-    const availableCommands = getCommands()
-    if (cleaned[0] in availableCommands) {
+  async function cBack(stering: string) {
+    const cleaned = cleanInput(stering);
+    if (cleaned.length === 0) {
+      obj.readline.prompt();
+    } else {
+      const availableCommands = obj.commands
+      if (cleaned[0] in availableCommands) {
         try {
-            availableCommands[cleaned[0]].callback(availableCommands)
-            }
-        catch (error) {
-            console.log(`Something went wrong: ${error}`)
+          await availableCommands[cleaned[0]].callback(obj);
+        } catch (error) {
+          console.log(`Something went wrong: ${error}`);
+          obj.readline.prompt();
         }
+      } else {
+        console.log("Unknown command");
+        obj.readline.prompt();
+      }
     }
-    else{
-        console.log("Unknown command")
-        rl.prompt()    
-    }
-    
   }
- }
 
-rl.on('line', (input) =>  {
-    cBack(input)
-    
-});
+  obj.readline.on("line", (input) => {
+    cBack(input);
+  });
 }
-
-
-
-

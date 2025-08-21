@@ -3,6 +3,7 @@ import { commandExit } from "./command_functions/command_exit.js";
 import { commandHelp } from "./command_functions/command_help.js";
 import { commandMap } from "./command_functions/command_map.js";
 import { commandMapb } from "./command_functions/command_mapb.js";
+import { commandExplore } from "./command_functions/command_explore.js";
 import { PokeAPI } from "./pokeapi.js";
 
 export type CLICommand = {
@@ -46,6 +47,11 @@ export function initState(): State {
             name: "mapb",
             description: "Displays previous 20 locations",
             callback: commandMapb,
+      },
+      explore: {
+            name: "explore",
+            description: "Shows Pokemons in given Area-Location",
+            callback: commandExplore,
       },
         
         

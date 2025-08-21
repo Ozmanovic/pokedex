@@ -18,7 +18,7 @@ export async function startREPL(obj: State) {
       const availableCommands = obj.commands
       if (cleaned[0] in availableCommands) {
         try {
-          await availableCommands[cleaned[0]].callback(obj);
+          await availableCommands[cleaned[0]].callback(obj, ...cleaned.slice(1));
         } catch (error) {
           console.log(`Something went wrong: ${error}`);
           obj.readline.prompt();

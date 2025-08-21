@@ -9,7 +9,7 @@ import { PokeAPI } from "./pokeapi.js";
 export type CLICommand = {
   name: string;
   description: string;
-  callback: (state: State) => Promise<void>;
+  callback: (state: State, ...args: string[]) => Promise<void>;
 };
 
 export type State = {
@@ -48,7 +48,7 @@ export function initState(): State {
             description: "Displays previous 20 locations",
             callback: commandMapb,
       },
-      explore: {
+        explore: {
             name: "explore",
             description: "Shows Pokemons in given Area-Location",
             callback: commandExplore,

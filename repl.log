@@ -2,18 +2,6 @@
 > pokedex@1.0.0 dev
 > npx tsc && node dist/main.js
 
-Pokedex > Debug - args: [ 'pastoria-city-area' ]
-Debug - args[0]: pastoria-city-area
-Exploring pastoria-city-area...
-Found Pokemon:
- - tentacool
- - tentacruel
- - magikarp
- - gyarados
- - remoraid
- - octillery
- - wingull
- - pelipper
- - shellos
- - gastrodon
-Closing the Pokedex... Goodbye!
+Pokedex > Throwing a Pokeball at squirtle...
+squirtle should be an easy catch!(odds: 66%)
+YOU GOT THE LITTLE BITCH! squirtle Is added to your PokeDex

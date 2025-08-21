@@ -4,6 +4,8 @@ import { commandHelp } from "./command_functions/command_help.js";
 import { commandMap } from "./command_functions/command_map.js";
 import { commandMapb } from "./command_functions/command_mapb.js";
 import { commandExplore } from "./command_functions/command_explore.js";
+import { commandCatch } from "./command_functions/command_catch.js";  
+import { Pokemon } from "./pokeapi.js";
 import { PokeAPI } from "./pokeapi.js";
 
 export type CLICommand = {
@@ -18,9 +20,11 @@ export type State = {
   pokeApi: PokeAPI;
   nextLocationsURL: string;
   prevLocationsURL: string;
+  pokeDex: Record<string, Pokemon> 
 };
 
 export function initState(): State {
+    
     const readline = createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -53,10 +57,15 @@ export function initState(): State {
             description: "Shows Pokemons in given Area-Location",
             callback: commandExplore,
       },
+        catch: {
+          name: "catch",
+          description: "Catches pokemon",
+          callback: commandCatch,
+      },
         
         
 
       
     }
-    return {readline, commands, pokeApi: new PokeAPI(), nextLocationsURL: "https://pokeapi.co/api/v2/location-area/", prevLocationsURL: "" }
+    return {readline, commands, pokeApi: new PokeAPI(), nextLocationsURL: "https://pokeapi.co/api/v2/location-area/", prevLocationsURL: "", pokeDex:{}}
 }
